@@ -55,7 +55,7 @@
    outline: 1px solid green;
    text-align: center;
    cursor: pointer;
-   transition: 0.1s;
+   /* transition: 0.1s; */
    align-items: center;
 }
    
@@ -79,14 +79,16 @@
 
 /* loader content */
 .loader {
+   grid-column: 1 / span 3;
    border: 13px solid whitesmoke;
    border-top: 13px solid #159b41;
    border-radius: 50%;
    width: 75px;
    height: 75px;
    animation: spin 2s linear infinite;
-   margin-left: 100px;
-   margin-top: 45px;
+   text-align: center;
+   /* margin-left: 100px; */
+   /* margin-top: 45px; */
    display: none;
 }
    
