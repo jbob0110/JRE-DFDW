@@ -85,7 +85,7 @@ window.onload = () => {
   addSubTask({"fields":{  "project":{  "key": project },"parent":{ "key": jiraKey},"summary":"Documentation","description":" ","assignee":{  "name": Po},"reporter":{  "name": Po},"issuetype":{  "name":"Sub-task"}} });
   console.log("Documentation Sent");
   /**The Test Case XMLHttpRequest is opened and sent*/        
-  addSubTask({"fields":{  "project":{  "key": project },"parent":{ "key": jiraKey},"summary":"Release Information","description":" ","assignee":{  "name": Sm},"reporter":{  "name": Sm},"issuetype":{  "name":"Sub-task"}} });
+  addSubTask({"fields":{  "project":{  "key": project },"parent":{ "key": jiraKey},"summary":"Requirements","description":" ","assignee":{  "name": Sm},"reporter":{  "name": Sm},"issuetype":{  "name":"Sub-task"}} });
   console.log("Release Information Sent");
   addSubTask({"fields":{  "project":{  "key": project },"parent":{ "key": jiraKey},"summary":"Release Information","description":" ","assignee":{  "name": Sm},"reporter":{  "name": Sm},"issuetype":{  "name":"Sub-task"}} });
   console.log("Release Information Sent");
