@@ -167,7 +167,7 @@ window.onload = () => {
 function addSubTask(subtask){
   var xhr = new XMLHttpRequest;
   xhr.open("POST", "https://"+jiraInstance+".cerner.com/rest/api/2/issue/");
-  xhr.setRequestHeader("Content-Type","application/json");
+  xhr.setRequestHeader("Content-Type","application/json","Access-Control-Allow-Origin");
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
       console.log(xhr.responseText);
