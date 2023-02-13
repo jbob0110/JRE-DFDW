@@ -3,83 +3,38 @@ var project;
 var jiraInstance;
 var url;
 var description;
+var gComp;
+var gAsset;
+var gAlignTeam;
 // asyncRequestCount keeps track of when the sub-tasks and labels are being sent.
 var asyncRequestCount = 0;
 /**This if checks the users browser and grabs their browser information based on this.*/
 chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs) {
   url = tabs[0].url;
   getURLs(url);
+  chrome.scripting.executeScript({
+    target: {tabId: tabs[0].id},
+    func: getValues,
+  })
+  .then(injectionResults => {
+    for (const {frameId, result} of injectionResults) {
+      gComp = result['component'];
+      gAsset = result['asset'];
+      gAlignTeam = result['alignTeam'];
+    };
+  });
 });
-//chrome.storage.sync.get(['POarray'], function (result) {
-  //var x = document.getElementById("POs");
-  //var option;
-  //if(result.POarray){
-    //for (var i = 0; i< result.POarray.length; i++){
-      //option = document.createElement("option");
-      //var split = result.POarray[i].split("<spa");
-      //split = split[0].split(" :");
-      //option.text = split[0];
-      //option.value = split[1];
-      //x.add(option);
-    //}
-  //}
-//}
-//);
-//chrome.storage.sync.get(['SMarray'], function(result) {
-  //var x = document.getElementById("SMs");
-  //var option, split;
-  //if(result.SMarray){
-    //for(var i = 0; i< result.SMarray.length; i++){
-      //option = document.createElement("option");
-      //split = result.SMarray[i].split("<spa");
-      //split = split[0].split(" :");
-      //option.text = split[0];
-      //option.value = split[1];
-      //x.add(option);
-    //}
-  //}
-//}
-//);
-//chrome.storage.sync.get(['SEarray'], function(result) {
-  //var x = document.getElementById("SEs");
-  //var option, split;
-  //if(result.SEarray){
-    //for(var i = 0; i< result.SEarray.length; i++){
-      //option = document.createElement("option");
-      //split = result.SEarray[i].split("<spa");
-      //split = split[0].split(" :");
-      //option.text = split[0];
-      //option.value = split[1];
-      //x.add(option);
-    //}
-  //}
-//}
-//);
-//chrome.storage.sync.get(['TLarray'], function(result) {
-  //var x = document.getElementById("TLs");
-  //var option, split;
-  //if(result.TLarray){
-    //for(var i = 0; i< result.TLarray.length; i++){
-      //option = document.createElement("option");
-      //split = result.TLarray[i].split("<spa");
-      //split = split[0].split(" :");
-      //option.text = split[0];
-      //option.value = split[1];
-      //x.add(option);
-    //}
-  //}
-//}
-//);
+
+function getValues(){
+  return {
+    component: document.getElementById('components-val').innerText,
+    asset: document.getElementById('customfield_22100-val').innerText,
+    alignTeam: document.getElementById('customfield_22101-val').innerText,
+  }
+};
+
 window.onload = () => {
   document.getElementById('scYes').onclick = () => {
-    //var Po = document.getElementById('POs').value;
-    //var Sm = document.getElementById('SMs').value;
-    //var Se = document.getElementById('SEs').value;
-    //var Tl = document.getElementById('TLs').value;
-    //console.log("PO: "+Po);
-    //console.log("SM: "+Sm);
-    //console.log("SE: "+Se);
-    //console.log("TL: "+Tl);
     document.getElementById('loader').style.display = "block";
          
   addSubTask(
@@ -154,14 +109,6 @@ window.onload = () => {
   );
     console.log("Tech Design Sent");
   };
-  
-  //document.getElementById("options").onclick = () =>{
-    //if (chrome.runtime.openOptionsPage) {
-      //chrome.runtime.openOptionsPage();
-    //} else {
-      //window.open(chrome.runtime.getURL('options.html'));
-    //}
-  //};
 };
 
 function addSubTask(subtask){
